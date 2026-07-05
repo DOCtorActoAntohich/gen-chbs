@@ -1,3 +1,5 @@
+use std::num::NonZero;
+
 use chbs::config::BasicConfig;
 use chbs::probability::Probability;
 use chbs::scheme::{Scheme, ToScheme};
@@ -7,11 +9,11 @@ use clap::{Parser, ValueEnum};
 #[derive(Parser)]
 struct Args {
     /// How many phrases to generate.
-    #[arg(long, default_value_t = 1)]
-    phrases: u32,
+    #[arg(long, default_value_t = NonZero::new(1).unwrap())]
+    phrases: NonZero<u32>,
     /// Words per phrase.
-    #[arg(long, default_value_t = 2)]
-    words: u8,
+    #[arg(long, default_value_t = NonZero::new(2).unwrap())]
+    words: NonZero<u8>,
     /// Separator between words in each phrase.
     #[arg(long, default_value_t = Separator::Dash)]
     separator: Separator,
@@ -37,7 +39,7 @@ fn main() {
 
     let scheme = args.generation_scheme();
 
-    (0..args.phrases).for_each(|_| println!("{}", scheme.generate()));
+    (0..args.phrases.get()).for_each(|_| println!("{}", scheme.generate()));
 }
 
 impl Args {
@@ -60,7 +62,7 @@ impl Args {
         };
 
         BasicConfig {
-            words: self.words.into(),
+            words: self.words.get().into(),
             word_provider: word_list.sampler(),
             separator: self.separator.as_arg(),
             capitalize_first,
