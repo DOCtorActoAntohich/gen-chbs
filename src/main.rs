@@ -18,12 +18,16 @@ struct Args {
     /// Capital letters.
     #[arg(long, default_value_t = Capitalize::None)]
     capitalize: Capitalize,
-    /// Set of words to choose from.
-    ///
-    /// `General Short` is for 5 letter words.
-    /// `Short` is a small amount of common words, they may be long.
-    /// `Large` is the richest set of different words (recommended).
-    #[arg(long, default_value_t = WordListOpt::Large)]
+    #[arg(
+        long,
+        default_value_t = WordListOpt::Large,
+        long_help = "\
+            Set of words to choose from.\n\n\
+            `Large` is the richest set of different words (recommended).\n\
+            `Short` is a small subset of common words, they may be long.\n\
+            `General Short` is for 5 letter words.\
+        ",
+    )]
     word_list: WordListOpt,
 }
 
