@@ -2,7 +2,7 @@ use chbs::config::BasicConfig;
 use chbs::probability::Probability;
 use chbs::scheme::{Scheme, ToScheme};
 use chbs::word::WordList;
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 
 #[derive(Parser)]
 struct Args {
@@ -57,7 +57,9 @@ fn generation_scheme(args: &Args) -> Scheme {
     .to_scheme()
 }
 
-#[derive(Debug, Clone, Copy, derive_more::FromStr, derive_more::Display)]
+#[derive(Debug, Clone, Copy, ValueEnum, derive_more::FromStr, derive_more::Display)]
+#[from_str(rename_all = "kebab-case")]
+#[display(rename_all = "kebab-case")]
 enum Separator {
     Dash,
     Space,
@@ -83,7 +85,7 @@ impl Separator {
     }
 }
 
-#[derive(Debug, Clone, Copy, derive_more::FromStr, derive_more::Display)]
+#[derive(Debug, Clone, Copy, ValueEnum, derive_more::FromStr, derive_more::Display)]
 #[from_str(rename_all = "kebab-case")]
 #[display(rename_all = "kebab-case")]
 enum Capitalize {
@@ -92,7 +94,7 @@ enum Capitalize {
     None,
 }
 
-#[derive(Debug, Clone, Copy, derive_more::FromStr, derive_more::Display)]
+#[derive(Debug, Clone, Copy, ValueEnum, derive_more::FromStr, derive_more::Display)]
 #[from_str(rename_all = "kebab-case")]
 #[display(rename_all = "kebab-case")]
 enum WordListOpt {
