@@ -7,7 +7,7 @@ based on [`chbs` crate][crate-chbs].
 
 ## Why?
 
-I needed to generate simple fun repository names,
+I needed to generate simple and funny repository names to choose from,
 but you can use it to generate easy to remember passwords.
 
 ## How to run
