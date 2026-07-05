@@ -30,37 +30,39 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let scheme = generation_scheme(&args);
+    let scheme = args.generation_scheme();
 
     (0..args.phrases).for_each(|_| println!("{}", scheme.generate()));
 }
 
-fn generation_scheme(args: &Args) -> Scheme {
-    let word_list = match args.word_list {
-        WordListOpt::GeneralShort => WordList::builtin_eff_general_short(),
-        WordListOpt::Short => WordList::builtin_eff_short(),
-        WordListOpt::Large => WordList::builtin_eff_large(),
-    };
+impl Args {
+    pub fn generation_scheme(&self) -> Scheme {
+        let word_list = match self.word_list {
+            WordListOpt::GeneralShort => WordList::builtin_eff_general_short(),
+            WordListOpt::Short => WordList::builtin_eff_short(),
+            WordListOpt::Large => WordList::builtin_eff_large(),
+        };
 
-    let capitalize_first = match args.capitalize {
-        Capitalize::All => Probability::Always,
-        Capitalize::FirstLetter => Probability::Always,
-        Capitalize::None => Probability::Never,
-    };
-    let capitalize_words = match args.capitalize {
-        Capitalize::All => Probability::Always,
-        Capitalize::FirstLetter => Probability::Never,
-        Capitalize::None => Probability::Never,
-    };
+        let capitalize_first = match self.capitalize {
+            Capitalize::All => Probability::Always,
+            Capitalize::FirstLetter => Probability::Always,
+            Capitalize::None => Probability::Never,
+        };
+        let capitalize_words = match self.capitalize {
+            Capitalize::All => Probability::Always,
+            Capitalize::FirstLetter => Probability::Never,
+            Capitalize::None => Probability::Never,
+        };
 
-    BasicConfig {
-        words: args.words.into(),
-        word_provider: word_list.sampler(),
-        separator: args.separator.as_arg(),
-        capitalize_first,
-        capitalize_words,
+        BasicConfig {
+            words: self.words.into(),
+            word_provider: word_list.sampler(),
+            separator: self.separator.as_arg(),
+            capitalize_first,
+            capitalize_words,
+        }
+        .to_scheme()
     }
-    .to_scheme()
 }
 
 #[derive(Debug, Clone, Copy, ValueEnum, derive_more::FromStr, derive_more::Display)]
