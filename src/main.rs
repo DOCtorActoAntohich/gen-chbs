@@ -6,7 +6,8 @@ use clap::Parser;
 
 #[derive(Parser)]
 struct Args {
-    /// How many phrases to generate,
+    /// How many phrases to generate.
+    #[arg(long, default_value_t = 1)]
     phrases: u32,
     /// Words per phrase
     #[arg(long, default_value_t = 2)]
