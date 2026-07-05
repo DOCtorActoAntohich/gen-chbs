@@ -22,7 +22,8 @@ struct Args {
         long,
         default_value_t = WordListOpt::Large,
         long_help = "\
-            Set of words to choose from.\n\n\
+            Set of words to choose from.\n\
+            \n\
             `Large` is the richest set of different words (recommended).\n\
             `Short` is a small subset of common words, they may be long.\n\
             `General Short` is for 5 letter words.\
