@@ -15,9 +15,15 @@ struct Args {
     /// Separator between words in each phrase.
     #[arg(long, default_value_t = Separator::Dash)]
     separator: Separator,
+    /// Capital letters.
     #[arg(long, default_value_t = Capitalize::None)]
     capitalize: Capitalize,
-    #[arg(long, default_value_t = WordListOpt::GeneralShort)]
+    /// Set of words to choose from.
+    ///
+    /// `General Short` is for 5 letter words.
+    /// `Short` is a small amount of common words, they may be long.
+    /// `Large` is the richest set of different words (recommended).
+    #[arg(long, default_value_t = WordListOpt::Large)]
     word_list: WordListOpt,
 }
 
