@@ -1,0 +1,14 @@
+*
+**
+
+!/nix
+!/nix/**
+!/src
+!/src/**/*.rs
+
+!.gitignore
+!Cargo.lock
+!Cargo.toml
+!flake.lock
+!flake.nix
+!README.md
