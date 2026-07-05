@@ -7,6 +7,17 @@ use chbs::word::WordList;
 use clap::{Parser, ValueEnum};
 
 #[derive(Parser)]
+#[command(
+    about = "Generates correct-horse-battery-staple phrases.",
+    long_about = "\
+        Generates correct-horse-battery-staple phrases.\n\
+        \n\
+        It can be a password or just a funny sentence.\n\
+        You just need [I M A G I N A T I O N] to use it.\n\
+        \n\
+        Based on: https://xkcd.com/936/\
+    "
+)]
 struct Args {
     /// How many phrases to generate.
     #[arg(long, default_value_t = NonZero::new(1).unwrap())]
