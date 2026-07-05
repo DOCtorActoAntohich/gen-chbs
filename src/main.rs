@@ -62,6 +62,7 @@ enum Separator {
     Dash,
     Space,
     Underscore,
+    Tab,
 }
 
 impl From<Separator> for String {
@@ -76,6 +77,7 @@ impl Separator {
             Separator::Dash => "-",
             Separator::Space => " ",
             Separator::Underscore => "_",
+            Separator::Tab => "\t",
         }
         .to_owned()
     }
