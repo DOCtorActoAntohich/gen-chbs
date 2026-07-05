@@ -4,3 +4,7 @@ version = "0.0.1"
 edition = "2024"
 
 [dependencies]
+thiserror = "2"
+derive_more = { version = "2", features = ["full"] }
+chbs = "0.1"
+clap = { version = "4.6", features = ["derive"] }
