@@ -9,10 +9,10 @@ struct Args {
     /// How many phrases to generate.
     #[arg(long, default_value_t = 1)]
     phrases: u32,
-    /// Words per phrase
+    /// Words per phrase.
     #[arg(long, default_value_t = 2)]
     words: u8,
-    /// What goes between
+    /// Separator between words in each phrase.
     #[arg(long, default_value_t = Separator::Dash)]
     separator: Separator,
     #[arg(long, default_value_t = Capitalize::None)]
